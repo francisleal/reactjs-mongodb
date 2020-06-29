@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #04d361;
+    --primary-color-disabled: #009b46;
+    --cinza: #28272c;
+    --input-login: #000
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 14px Roboto, sans-serif;
+    -webkit-font-smoothing: initialised;
+}
+
+input, button, textarea {
+    font: 400 14px Roboto, sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+input:required,
+input:required:focus 
+input:required:after {
+    box-shadow: 0 0 0 0 !important;
+    outline: none !important;    
+}

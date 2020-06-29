@@ -1,0 +1,113 @@
+.forgot-password-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 16px;
+
+    background-image: url('../../assets/Wallpaper\ OmniStack\ 11\ -\ 1920x1080.jpg');
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot-password-container::after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.forgot-password-container .form {
+    z-index: 2;
+    width: 360px;
+}
+
+.forgot-password-container .form h1 {
+    padding: 16px 0;
+    color: #fff;
+    font-size: 21px;
+}
+
+.forgot-password-container .form h1 span {
+    color: var(--primary-color);
+}
+
+.forgot-password-container .form .form-div {
+    color: #fff;
+    position: relative;
+    padding: 3px;
+}
+
+.forgot-password-container .form .form-div svg {
+    color: var(--cinza);
+
+    left: 17px;
+    top: 19px;
+    position: absolute;
+    color: var(--cinza);
+    font-size: 14px;
+    transition: color 0.2s ease 0s;
+}
+
+.forgot-password-container .form .form-div input {
+    background: #100f12;
+    padding-left: 42px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    height: 50px;
+    border-radius: 5px;
+    width: 100%;
+    border: 2px solid var(--cinza);
+    transition: border 0.2s ease 0s;
+}
+
+.forgot-password-container .form .form-div input:focus {
+    border: 2px solid var(--primary-color);
+}
+
+.forgot-password-container .form .form-div input:focus + svg {
+    color: var(--primary-color);
+}
+
+.forgot-password-container .form .form-div a {
+    font-weight: initial;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0.6;
+    transition: opacity 0.2s ease 0s
+}
+
+.forgot-password-container .form .form-div a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.forgot-password-container .form .form-div button {
+    background: var(--primary-color-disabled);
+    width: 100%;
+    border-radius: 5px;
+    border: 0px none;
+    color: #a6ffce;
+    font-size: 16px;
+    font-weight: bold;
+    height: 50px;
+    transition: background 0.2s ease 0s, color 0.2s ease 0s;
+
+}
+
+.forgot-password-container .form .form-div button:hover {
+    background: var(--primary-color);
+    color: #fff
+}
+
+.forgot-password-container .form .form-div:last-child {
+    font-weight: 100;
+    text-align: center;
+    margin-top: 18px;
+}

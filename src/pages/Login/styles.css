@@ -1,0 +1,130 @@
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 16px;
+
+    background-image: url('../../assets/Wallpaper\ OmniStack\ 11\ -\ 1920x1080.jpg');
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container::after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.login-container .form {
+    z-index: 2;
+    width: 360px;
+}
+
+.login-container .form h1 {
+    padding: 16px 0;
+    color: #fff;
+    font-size: 21px;
+}
+
+.login-container .form h1 span {
+    color: var(--primary-color);
+}
+
+.login-container .form .form-div {
+    color: #fff;
+    position: relative;
+    padding: 3px;
+}
+
+.login-container .form .form-div svg {
+    color: var(--cinza);
+
+    left: 17px;
+    top: 19px;
+    position: absolute;
+    color: var(--cinza);
+    font-size: 14px;
+    transition: color 0.2s ease 0s;
+}
+
+.login-container .form .form-div input {
+    background: #100f12;
+    padding-left: 42px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    height: 50px;
+    border-radius: 5px;
+    width: 100%;
+    border: 2px solid var(--cinza);
+    transition: border 0.2s ease 0s;
+}
+
+.login-container .form .form-div input:focus {
+    border: 2px solid var(--primary-color);
+}
+
+.login-container .form .form-div input:focus + svg {
+    color: var(--primary-color);
+}
+
+/* .login-container .form .form-div input:focus:invalid  {
+    border: 2px solid  red;
+}
+
+.login-container .form .form-div input:focus:invalid + svg {
+    color:  red;
+} */
+
+.login-container .form .form-div a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0.8;
+    transition: opacity 0.2s ease 0s
+}
+
+.login-container .form .form-div a:hover {
+    opacity: 1;
+}
+
+.login-container .form .form-div button {
+    background: var(--primary-color-disabled);
+    width: 100%;
+    border-radius: 5px;
+    border: 0px none;
+    color: #a6ffce;
+    font-size: 16px;
+    font-weight: bold;
+    height: 50px;
+    transition: background 0.2s ease 0s, color 0.2s ease 0s;
+
+}
+
+.login-container .form .form-div button:disabled {    
+    cursor: no-drop;
+}
+
+.login-container .form .form-div button:disabled:hover {
+    background: var(--primary-color-disabled);
+}
+
+.login-container .form .form-div button:hover {
+    background: var(--primary-color);
+    color: #fff
+}
+
+.login-container .form .form-div:nth-of-type(4) {
+    padding: 13px 0;
+}
+
+.login-container .form .form-div:last-child {
+    text-align: center;
+    margin-top: 18px;
+}
+
