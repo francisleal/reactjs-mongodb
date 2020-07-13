@@ -1,0 +1,202 @@
+/* header */
+.note header {
+    height: 10vh;
+    padding: 0 64px;
+
+    display: flex;
+    align-items: center;    
+}
+.note header .titulo span {
+    color: var(--primary-color);
+}
+.note header .sair {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+/* section */
+.note section {
+    background: url('../../assets/Wallpaper\ OmniStack\ 11\ -\ 1920x1080.jpg');
+    color: #fff;
+    display: flex;
+}
+.note section:after {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 90vh;
+    background: rgba(0, 0, 0, 0.6);
+}
+.note section h4 span {
+    color: var(--primary-color);
+}
+.note section .form-div {
+    padding: 3px;
+}
+
+/* aside */
+.note aside {
+    background: #000;
+    height: 90vh;
+    width: 450px;
+    padding: 16px;   
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    transition: 1s all;
+    left: -450px;
+}
+.note aside .close-form {
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.note aside .close-form:hover {
+    color: red;
+}
+
+/* usado no javascript */
+.note aside.aside.close{
+    left: -450px;
+}
+.note aside.aside.show{
+    left: 0px;
+}
+
+/* main */
+.note main {
+    height: 90vh;
+    padding: 16px;
+    z-index: 2;
+}
+
+/* formulário */
+.note form {
+    border: 1px solid #100f12;
+    padding: 32px;
+    width: 350px;
+}
+.note form h4 {
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+.note form input[type=text],
+.note form textarea {
+    background: #100f12;
+    padding: 8px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    height: 50px;
+    border-radius: 5px;
+    width: 100%;
+    border: 2px solid var(--cinza);
+    transition: border 0.2s ease 0s;
+}
+.note form .form-div.radio {
+    display: flex;
+    align-items: center;
+}
+.note form .form-div.radio p {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+.note form .form-div.radio label {
+    margin: 0 4px;
+    color: #999;
+    cursor: pointer;
+}
+.note form .form-div.radio input[type=radio]:nth-of-type(2)  {
+    margin-left: 8px;
+}
+.note button {
+    background: var(--primary-color-disabled);
+    width: 100%;
+    border-radius: 5px;
+    border: 0px none;
+    color: #a6ffce;
+    font-size: 16px;
+    font-weight: bold;
+    height: 50px;
+    transition: background 0.2s ease 0s, color 0.2s ease 0s;
+    margin-top: 16px;
+}
+.note button:disabled {    
+    cursor: no-drop;
+}
+.note button:disabled:hover {
+    background: var(--primary-color-disabled);
+}
+.note button:hover {
+    background: var(--primary-color);
+    color: #fff
+}
+.note form textarea {
+    height: 100px;
+}
+
+/* card */
+.card-header .close {
+    opacity: 0;
+    float: right;
+    cursor: pointer;
+    transition: opacity 0.4s;
+}
+.card:hover .close {
+    opacity: 1;
+    visibility: visible;
+}
+.card-header .close:hover {
+    color: red;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card {
+    padding: 8px;
+    margin: 8px;
+    height: 250px;
+    width: 250px;
+    border-radius: 6px;
+    background: rgba(21, 19, 23, 0.89);
+    border: 1px solid transparent;
+    transition: border 0.4s;
+}
+.card:hover {
+    border: 1px solid var(--primary-color);
+}
+.card-body {
+    color: #999;
+}
+
+/* butão para adicionar */
+.note .add {
+    position: absolute;
+    z-index: 3;
+    width: 70px;
+    height: 70px;
+    right: 64px;
+    bottom: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: var(--primary-color-disabled);
+}
+
+.note .add:hover {
+    background-color: var(--primary-color)
+}
+
