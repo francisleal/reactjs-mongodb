@@ -5,10 +5,12 @@ import api from '../../services/api'
 
 import './styles.css';
 import Formulario from './Formulario';
+import Alert from '../Alert';
 
 function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [mensagemAlert, setMensagemAlert] = useState('');
 
     const history = useHistory();
 
@@ -24,12 +26,10 @@ function Login(props) {
 
             history.push('/note')
 
-            console.log('response ', response.data)
+            console.log('response ', response)
         } catch (err) {
-            alert('User not found');
+            setMensagemAlert('Não foi possível realizar o login');
         }
-
-        console.log(data)
     }
 
     return (
@@ -44,6 +44,10 @@ function Login(props) {
                 changePassoword={e => setPassword(e.target.value)}
             >
             </Formulario>
+
+            <Alert
+                error={mensagemAlert}
+            ></Alert>
         </section>
     );
 }

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import api from '../../services/api'
 
 import './styles.css';
+import Alert from '../Alert';
 
 function Register() {
 
@@ -11,6 +12,8 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [mensagemError, setMensagemError] = useState('');
 
     const history = useHistory();
 
@@ -42,20 +45,24 @@ function Register() {
                 const result = await fetchResponse.json();
 
                 if (result.error)
-                    alert(result.error);
+                setMensagemError('Não foi possivel criar sua conta');
 
                 return result;
             } catch (err) {
-                alert(err);
+                setMensagemError('Não foi possivel criar sua conta');
             }
 
         } else {
-            alert('As senhas estão diferentes');
+            setMensagemError('As senhas estão diferentes');
         }
     }
 
     return (
         <div className="register-container">
+            <Alert 
+                error={mensagemError}
+            ></Alert>
+
             <form className="form" name="form" onSubmit={handleRegister}>
                 <div className="form-div">
                     <h1>Save note <span>Register</span></h1>
