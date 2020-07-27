@@ -12,10 +12,14 @@ function Login(props) {
     const [password, setPassword] = useState('');
     const [mensagemAlert, setMensagemAlert] = useState('');
 
+    const usuarioLogado = localStorage.getItem('usuario');
+
     const history = useHistory();
 
     useEffect(() => {
-        verificaUsuarioLogado();
+        if (usuarioLogado) {
+            history.push('/note');
+        }
     });
 
     async function handdleLogin(e) {
@@ -34,14 +38,6 @@ function Login(props) {
             console.log('response ', response)
         } catch (err) {
             setMensagemAlert('Não foi possível realizar o login');
-        }
-    }
-
-    function verificaUsuarioLogado() {
-        const usuarioLogado = localStorage.getItem('usuario');
-
-        if (usuarioLogado) {
-            history.push('/note');
         }
     }
 

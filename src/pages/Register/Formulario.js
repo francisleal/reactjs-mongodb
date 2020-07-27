@@ -3,18 +3,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Formulario(props) {
-
     return (
-        <form className="form" onSubmit={props.onSubmitProps}>
+        <form className="form" name="form" onSubmit={props.onSubmitProps}>
             <div className="form-div">
-                <h1>Save note <span>Login</span></h1>
+                <h1>Save note <span>Register</span></h1>
             </div>
             <div className="form-div">
                 <input
                     required
                     type="text"
+                    name="name"
+                    placeholder="Digite seu nome"
+                    value={props.valorName}
+                    onChange={props.changeName}
+                />
+                <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
+            </div>
+            <div className="form-div">
+                <input
+                    required
+                    type="email"
                     name="email"
-                    placeholder="E-mail"
+                    placeholder="Digite seu e-mail"                    
                     value={props.valorEmail}
                     onChange={props.changeEmail}
                 />
@@ -25,26 +35,33 @@ function Formulario(props) {
                     required
                     type="password"
                     name="password"
-                    placeholder="Senha"
-                    autoComplete="on"
+                    placeholder="Digite sua senha"
+                    autoComplete="off"
                     value={props.password}
                     onChange={props.changePassoword}
                 />
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>
             </div>
-
             <div className="form-div">
-                <Link to="/forgot_password">Esqueci minha senha</Link>
+                <input
+                    required
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirme sua senha"
+                    autoComplete="off"
+                    value={props.confirmPassword}
+                    onChange={props.changeConfirmPassoword}
+                />
+                <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>
             </div>
 
             <div className="form-div">
-                <button >Entrar</button>
+                <button >Cadastrar</button>
             </div>
 
             <div className="form-div">
-                Não tem uma conta? <Link to="/register">Registre-se</Link>
+                <Link to="/">Voltar</Link>
             </div>
-
         </form>
     )
 }

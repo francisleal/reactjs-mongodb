@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
 import './styles.css';
+import MenuLateral from './MenuLateral';
+import Dashboard from './Dashboard';
 import Alert from '../Alert';
 
 function Note() {
@@ -14,25 +16,16 @@ function Note() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [mensagemAlert, setMensagemAlert] = useState('');
-
-    const usuario = localStorage.getItem('usuario');
+    
     const Authorization = localStorage.getItem('token');
 
     const history = useHistory();
 
-    useEffect(() => {
-        async function handleList() {
-            try {
-                const response = await api.get('notas', { headers: { Authorization } });
-                setLists(response.data.noteUserLogged);
-            } catch (error) {
-                history.push('/');
-            }
-        }
-        handleList();
-    }, [Authorization, usuario, history]);
+    useEffect(() => {      
+        handleList(Authorization, history);
+    }, [Authorization, history]);
 
-    async function refesh() {
+    async function handleList(Authorization, history) {
         try {
             const response = await api.get('notas', { headers: { Authorization } });
             setLists(response.data.noteUserLogged);
@@ -50,21 +43,11 @@ function Note() {
             await api.post('notas', dados, { headers: { Authorization } });
 
             setMensagemAlert(`${title} - salvo com sucesso`);
-            limparCampo();
 
+            limparCampo();
         } catch (error) {
             setMensagemAlert('Não foi possível salvar a notificação');
         }
-    }
-
-    async function handleDelete(id) {
-        try {
-            await api.delete(`notas/${id}`, { headers: { Authorization } });
-            refesh();
-        } catch (error) {
-            setMensagemAlert('erro ao deletar o arquivo');
-        }
-        document.querySelector('main').classList.remove("fullpage");
     }
 
     const logout = () => {
@@ -88,20 +71,7 @@ function Note() {
     const limparCampo = () => {
         setTitle('')
         setDescription('')
-        refesh();
-    }
-
-    const openNote = (idNota) => {
-        const main = document.querySelector('main');
-        main.classList.toggle("fullpage");
-
-        const mainFulpage = document.querySelector('main.fullpage');
-
-        if (mainFulpage) {
-            setLists(lists.filter(list => list._id === idNota));
-        } else {
-            refesh();
-        }
+        handleList(Authorization, history);
     }
 
     return (
@@ -121,75 +91,24 @@ function Note() {
             </header>
 
             <section>
-                <aside className='aside close'>
-                    <span className='close-form' onClick={closeAdd}>X</span>
-                    <form id="form" onSubmit={handleSaveNote}>
-                        <h4>Adicionar <span>notificação</span></h4>
-                        <div className="form-div">
-                            <input
-                                type='text'
-                                placeholder='Titulo'
-                                value={title}
-                                onChange={e => setTitle(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-div">
-                            <textarea
-                                placeholder='Descrição'
-                                value={description}
-                                onChange={e => setDescription(e.target.value)}
-                            ></textarea>
-                        </div>
-                        <div className="form-div radio">
-                            <p>Tipo</p>
-                            <input
-                                type="radio"
-                                id="link"
-                                name="type"
-                                value="link"
-                                onChange={e => setType(e.target.value)}
-                            />
-                            <label for="link">Link</label>
+                <MenuLateral
+                    closeProps={closeAdd}
 
-                            <input
-                                type="radio"
-                                id="anotacao"
-                                name="type"
-                                value="anotacao"
-                                onChange={e => setType(e.target.value)}
-                            />
-                            <label for="anotacao">Anotação</label>
-                        </div>
+                    onSubmitProps={handleSaveNote}
 
-                        <div className="form-div">
-                            <button>Salvar</button>
-                        </div>
-                    </form>
-                </aside>
+                    titleValue={title}
+                    titleChange={e => setTitle(e.target.value)}
 
-                <main>
-                    <div className='card-container'>
-                        {
-                            lists.map(list => (
-                                <div className='card' key={list._id} onDoubleClick={() => openNote(list._id)}>
-                                    <div className='card-header'>
-                                        <span>{list.title}</span>
-                                        <span className='close' onClick={() => handleDelete(list._id)}>x</span>
-                                    </div>
-                                    <div className='card-body'>
-                                        {list.description}
-                                    </div>
-                                </div>
-                            ))
-                        }
+                    descriptionValue={description}
+                    descriptonChange={e => setDescription(e.target.value)}
 
-                    </div>
-                </main>
+                    linkChange={e => setType(e.target.value)}
+                ></MenuLateral>
 
-                {/* <Link to="/">Voltar</Link> */}
+                <Dashboard listas={lists} />
             </section>
         </div>
     );
 }
 
-export default Note
+export default Note;
