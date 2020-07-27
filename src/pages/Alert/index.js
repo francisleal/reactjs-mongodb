@@ -7,11 +7,11 @@ function Alert(props) {
     const [mensagem, setMensagem] = useState('');
 
     useEffect(() => {
-        setMensagem(props.error);
+        setMensagem(props.msg);
 
         setTimeout(() => setMensagem(''), 3000);
 
-    }, [props.error]);
+    }, [props.msg]);
 
     return (
         <>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {  useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
 import './styles.css';
+import Alert from '../Alert';
 
 function Note() {
 
@@ -12,10 +13,10 @@ function Note() {
     const [type, setType] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [mensagemAlert, setMensagemAlert] = useState('');
 
+    const usuario = localStorage.getItem('usuario');
     const Authorization = localStorage.getItem('token');
-
-    const [salvar, setSalvar] = useState(false);
 
     const history = useHistory();
 
@@ -23,13 +24,22 @@ function Note() {
         async function handleList() {
             try {
                 const response = await api.get('notas', { headers: { Authorization } });
-                setLists(response.data.note)
+                setLists(response.data.noteUserLogged);
             } catch (error) {
-                alert('erro ao carregar os usuários');
+                history.push('/');
             }
         }
         handleList();
-    }, [Authorization, salvar]);
+    }, [Authorization, usuario, history]);
+
+    async function refesh() {
+        try {
+            const response = await api.get('notas', { headers: { Authorization } });
+            setLists(response.data.noteUserLogged);
+        } catch (error) {
+            history.push('/');
+        }
+    }
 
     async function handleSaveNote(e) {
         e.preventDefault();
@@ -38,20 +48,23 @@ function Note() {
 
         try {
             await api.post('notas', dados, { headers: { Authorization } });
-            setSalvar(true);
-            alert('enviado com sucesso');
+
+            setMensagemAlert(`${title} - salvo com sucesso`);
+            limparCampo();
+
         } catch (error) {
-            alert('Não foi possível salvar a notificação');
+            setMensagemAlert('Não foi possível salvar a notificação');
         }
     }
 
     async function handleDelete(id) {
         try {
             await api.delete(`notas/${id}`, { headers: { Authorization } });
-            setLists(lists.filter(list => list._id !== id));
+            refesh();
         } catch (error) {
-            alert('erro ao deletar o arquivo');
+            setMensagemAlert('erro ao deletar o arquivo');
         }
+        document.querySelector('main').classList.remove("fullpage");
     }
 
     const logout = () => {
@@ -72,8 +85,29 @@ function Note() {
         form.classList.remove('close')
     }
 
+    const limparCampo = () => {
+        setTitle('')
+        setDescription('')
+        refesh();
+    }
+
+    const openNote = (idNota) => {
+        const main = document.querySelector('main');
+        main.classList.toggle("fullpage");
+
+        const mainFulpage = document.querySelector('main.fullpage');
+
+        if (mainFulpage) {
+            setLists(lists.filter(list => list._id === idNota));
+        } else {
+            refesh();
+        }
+    }
+
     return (
         <div className='note'>
+
+            <Alert msg={mensagemAlert}></Alert>
 
             <div className="add" onClick={openAdd}>
                 <span>+</span>
@@ -89,7 +123,7 @@ function Note() {
             <section>
                 <aside className='aside close'>
                     <span className='close-form' onClick={closeAdd}>X</span>
-                    <form onSubmit={handleSaveNote}>
+                    <form id="form" onSubmit={handleSaveNote}>
                         <h4>Adicionar <span>notificação</span></h4>
                         <div className="form-div">
                             <input
@@ -137,7 +171,7 @@ function Note() {
                     <div className='card-container'>
                         {
                             lists.map(list => (
-                                <div className='card' key={list._id}>
+                                <div className='card' key={list._id} onDoubleClick={() => openNote(list._id)}>
                                     <div className='card-header'>
                                         <span>{list.title}</span>
                                         <span className='close' onClick={() => handleDelete(list._id)}>x</span>

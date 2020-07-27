@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import api from '../../services/api'
+// import api from '../../services/api'
 
 import './styles.css';
 import Alert from '../Alert';
@@ -15,7 +15,7 @@ function Register() {
 
     const [mensagemError, setMensagemError] = useState('');
 
-    const history = useHistory();
+    // const history = useHistory();
 
     async function handleRegister(e) {
         e.preventDefault();
@@ -52,16 +52,18 @@ function Register() {
                 setMensagemError('Não foi possivel criar sua conta');
             }
 
-        } else {
+        } else {            
             setMensagemError('As senhas estão diferentes');
+        }
+
+        if(mensagemError !== '') {
+            setMensagemError('')
         }
     }
 
     return (
         <div className="register-container">
-            <Alert 
-                error={mensagemError}
-            ></Alert>
+            <Alert msg={mensagemError} />
 
             <form className="form" name="form" onSubmit={handleRegister}>
                 <div className="form-div">

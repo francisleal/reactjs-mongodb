@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api'
@@ -14,6 +14,10 @@ function Login(props) {
 
     const history = useHistory();
 
+    useEffect(() => {
+        verificaUsuarioLogado();
+    });
+
     async function handdleLogin(e) {
         e.preventDefault();
 
@@ -23,12 +27,21 @@ function Login(props) {
             const response = await api.post('auth/authenticate', data);
 
             localStorage.setItem('token', `Bearer ${response.data.token}`);
+            localStorage.setItem('usuario', response.data.user._id);
 
-            history.push('/note')
+            history.push('/note');
 
             console.log('response ', response)
         } catch (err) {
             setMensagemAlert('Não foi possível realizar o login');
+        }
+    }
+
+    function verificaUsuarioLogado() {
+        const usuarioLogado = localStorage.getItem('usuario');
+
+        if (usuarioLogado) {
+            history.push('/note');
         }
     }
 
@@ -45,9 +58,7 @@ function Login(props) {
             >
             </Formulario>
 
-            <Alert
-                error={mensagemAlert}
-            ></Alert>
+            <Alert msg={mensagemAlert} />
         </section>
     );
 }

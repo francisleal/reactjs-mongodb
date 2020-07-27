@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: center;    
-    transition: 1s all;
+    transition: 0.5s all;
     left: -450px;
 }
 .note aside .close-form {
@@ -81,7 +81,7 @@
 /* formulário */
 .note form {
     border: 1px solid #100f12;
-    padding: 32px;
+    padding: 24px;
     width: 350px;
 }
 .note form h4 {
@@ -200,3 +200,12 @@
     background-color: var(--primary-color)
 }
 
+
+main.fullpage {
+    width: 100%;
+}
+
+main.fullpage .card {
+    width: 100%;
+    height: 80vh;
+}
